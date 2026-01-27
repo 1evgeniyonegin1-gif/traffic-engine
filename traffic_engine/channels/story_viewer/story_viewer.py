@@ -13,9 +13,13 @@ from telethon.tl.functions.stories import GetPeerStoriesRequest, ReadStoriesRequ
 from telethon.errors import (
     FloodWaitError,
     UserPrivacyRestrictedError,
-    StoryNotModifiedError,
     PeerIdInvalidError,
 )
+# StoryNotModifiedError может не существовать в старых версиях Telethon
+try:
+    from telethon.errors import StoryNotModifiedError
+except ImportError:
+    StoryNotModifiedError = Exception  # Fallback
 
 from traffic_engine.config import settings
 from traffic_engine.database import get_session

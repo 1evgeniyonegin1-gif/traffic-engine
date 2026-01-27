@@ -1,0 +1,148 @@
+==============================================
+КОМАНДЫ ДЛЯ ВЫПОЛНЕНИЯ НА СЕРВЕРЕ
+==============================================
+
+Скопируйте и выполните эти команды на вашем VPS сервере.
+
+==============================================
+ШАГ 1: ПОДКЛЮЧЕНИЕ К СЕРВЕРУ
+==============================================
+
+ssh root@ВАШ_IP
+
+==============================================
+ШАГ 2: АВТОМАТИЧЕСКИЙ ДЕПЛОЙ (РЕКОМЕНДУЕТСЯ)
+==============================================
+
+cd /root/traffic-engine-mvp
+git pull
+chmod +x DEPLOY_NOW.sh
+./DEPLOY_NOW.sh
+
+# Этот скрипт автоматически:
+# - Остановит систему
+# - Обновит код
+# - Отключит проблемные каналы
+# - Присоединится к discussion groups
+# - Добавит ЦА для Story Viewing
+# - Проверит готовность
+# - Запустит систему
+
+==============================================
+ШАГ 3: РУЧНОЙ ДЕПЛОЙ (если автоматический не сработал)
+==============================================
+
+# 1. Остановить систему
+systemctl stop traffic-engine
+# Или если через screen:
+pkill -f run_auto_comments.py
+
+# 2. Обновить код
+cd /root/traffic-engine-mvp
+git pull
+
+# 3. Отключить проблемные каналы
+python3 scripts/fix_bad_channels.py
+
+# 4. Присоединиться к discussion groups
+python3 scripts/auto_join_discussions.py
+
+# 5. Добавить ЦА для Story Viewing
+python3 scripts/quick_add_audience.py
+
+# 6. Проверить готовность
+python3 scripts/check_story_viewing_ready.py
+
+# 7. Запустить систему
+systemctl start traffic-engine
+# Или если через screen:
+screen -dmS traffic python3 run_auto_comments.py
+
+==============================================
+ШАГ 4: МОНИТОРИНГ
+==============================================
+
+# Смотреть логи в реальном времени
+tail -f logs/traffic_engine_*.log | grep -E "(story|comment|success|failed)"
+
+# Или через systemd
+journalctl -u traffic-engine -f
+
+# Или через screen
+screen -r traffic
+
+==============================================
+ШАГ 5: ПРОВЕРКА СТАТИСТИКИ (через 1-2 часа)
+==============================================
+
+# Статистика комментариев
+python3 scripts/show_comments_stats.py
+
+# Быстрый статус
+python3 scripts/quick_status.py
+
+# Все аккаунты
+python3 scripts/show_all_accounts.py
+
+# Story views статистика
+python3 scripts/story_stats.py
+
+==============================================
+ОЖИДАЕМЫЕ РЕЗУЛЬТАТЫ
+==============================================
+
+КОММЕНТАРИИ:
+- Было: 8/58 успешных (13.8%)
+- Ожидается: 18-24/58 успешных (30-40%)
+- Отключено: 4 проблемных канала
+- Присоединились: к discussion groups
+
+STORY VIEWING:
+- Лимит: 3 просмотра/день (День 2 прогрева)
+- ЦА: 100 пользователей (quality_score >= 50)
+- Интервалы: 5-15 минут
+- Ожидается: 40-60% success rate
+
+==============================================
+ЧТО ИСКАТЬ В ЛОГАХ
+==============================================
+
+ХОРОШИЕ ЗНАКИ:
+[SUCCESS] Story viewed successfully
+[SUCCESS] Posted comment to @channel: "текст..." (success)
+
+НОРМА (не ошибка):
+[INFO] User @user has no stories
+[INFO] No stories available for viewing
+
+ПЛОХИЕ ЗНАКИ:
+[WARNING] FloodWait (более 3 раз в час)
+[ERROR] Account banned
+[ERROR] Chat admin privileges required (должно пропасть)
+
+==============================================
+ЕСЛИ ЧТО-ТО НЕ ТАК
+==============================================
+
+# Проверить что система запущена
+systemctl status traffic-engine
+# Или
+ps aux | grep python
+
+# Перезапустить
+systemctl restart traffic-engine
+
+# Посмотреть последние ошибки
+tail -100 logs/traffic_engine_*.log | grep -i error
+
+# Анализ проблем
+python3 scripts/analyze_failures.py
+
+==============================================
+КОНТАКТЫ
+==============================================
+
+После деплоя напишите в чат результаты:
+python3 scripts/show_comments_stats.py
+
+Проверю что всё работает правильно!

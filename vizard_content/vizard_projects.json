@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-27T17:27:14.029231",
+  "timestamp": "2026-01-27T23:14:36.298519",
   "settings": {
     "lang": "ru",
     "videoType": 2,
@@ -12,62 +12,73 @@
     "emojiSwitch": 0,
     "autoBrollSwitch": 0
   },
-  "total_urls": 11,
+  "total_urls": 7,
   "successful": 7,
-  "failed": 4,
+  "failed": 0,
   "projects": [
     {
-      "url": "https://www.youtube.com/watch?v=TL1t3FPQEqc",
-      "project_id": 27743367,
-      "created_at": "2026-01-27T17:27:14"
+      "url": "https://youtu.be/8rCRKvCP_fw",
+      "project_id": 27752993,
+      "response": {
+        "code": 2000,
+        "projectId": 27752993
+      },
+      "created_at": "2026-01-27T23:11:58.038572"
     },
     {
-      "url": "https://www.youtube.com/watch?v=wL8DVHuHvAk",
-      "project_id": 27743374,
-      "created_at": "2026-01-27T17:27:16"
+      "url": "https://youtu.be/rZ9gpmqR8FA",
+      "project_id": 27752996,
+      "response": {
+        "code": 2000,
+        "projectId": 27752996
+      },
+      "created_at": "2026-01-27T23:12:03.958001"
     },
     {
-      "url": "https://www.youtube.com/watch?v=8nVHRNgXg1k",
-      "project_id": 27743376,
-      "created_at": "2026-01-27T17:27:18"
+      "url": "https://youtu.be/JUzyiKyfUrM",
+      "project_id": 27752997,
+      "response": {
+        "code": 2000,
+        "projectId": 27752997
+      },
+      "created_at": "2026-01-27T23:12:09.896700"
     },
     {
-      "url": "https://www.youtube.com/watch?v=RRJwdCDPxYU",
-      "project_id": 27743382,
-      "created_at": "2026-01-27T17:27:24"
+      "url": "https://youtu.be/V0adpQz5t48",
+      "project_id": null,
+      "response": {
+        "code": 2000,
+        "projectId": 27753014
+      },
+      "created_at": "2026-01-27T23:13:16.745597"
     },
     {
-      "url": "https://www.youtube.com/watch?v=Rn6IHN7K85g",
-      "project_id": 27743384,
-      "created_at": "2026-01-27T17:27:26"
+      "url": "https://youtu.be/IY3lsnkmHvU",
+      "project_id": 27753017,
+      "response": {
+        "code": 2000,
+        "projectId": 27753017
+      },
+      "created_at": "2026-01-27T23:13:22.587221"
     },
     {
-      "url": "https://www.youtube.com/watch?v=1TskQpbjKxE",
-      "project_id": 27743385,
-      "created_at": "2026-01-27T17:27:28"
+      "url": "https://youtu.be/8ahBYjEHwjs",
+      "project_id": 27753020,
+      "response": {
+        "code": 2000,
+        "projectId": 27753020
+      },
+      "created_at": "2026-01-27T23:13:29.414038"
     },
     {
-      "url": "https://www.youtube.com/watch?v=x0FSL-sFJDE",
-      "project_id": 27743389,
-      "created_at": "2026-01-27T17:27:34"
+      "url": "https://youtu.be/19rjUxRzz-I",
+      "project_id": null,
+      "response": {
+        "code": 2000,
+        "projectId": 27753039
+      },
+      "created_at": "2026-01-27T23:14:36.297846"
     }
   ],
-  "errors": [
-    {
-      "url": "https://www.youtube.com/watch?v=qp0HIF3SfI4",
-      "error": "Rate limit"
-    },
-    {
-      "url": "https://www.youtube.com/watch?v=j7R-C4Dklf8",
-      "error": "Rate limit"
-    },
-    {
-      "url": "https://www.youtube.com/watch?v=sHqYv-G6X9g",
-      "error": "Rate limit"
-    },
-    {
-      "url": "https://www.youtube.com/watch?v=dxQmOR_e1do",
-      "error": "Rate limit"
-    }
-  ]
+  "errors": []
 }
