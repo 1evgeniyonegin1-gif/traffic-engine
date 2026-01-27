@@ -1,0 +1,141 @@
+{
+  "timestamp": "2026-01-27T17:24:55.776488",
+  "total_collected": 11,
+  "selected": 11,
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=TL1t3FPQEqc",
+      "video_id": "TL1t3FPQEqc",
+      "title": "Проверенное видео",
+      "source": "known"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=wL8DVHuHvAk",
+      "video_id": "wL8DVHuHvAk",
+      "title": "Проверенное видео",
+      "source": "known"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=8nVHRNgXg1k",
+      "video_id": "8nVHRNgXg1k",
+      "title": "Проверенное видео",
+      "source": "known"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=qp0HIF3SfI4",
+      "video_id": "qp0HIF3SfI4",
+      "title": "Проверенное видео",
+      "source": "known"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=j7R-C4Dklf8",
+      "video_id": "j7R-C4Dklf8",
+      "title": "Проверенное видео",
+      "source": "known"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=RRJwdCDPxYU",
+      "video_id": "RRJwdCDPxYU",
+      "title": "Проверенное видео",
+      "source": "known"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Rn6IHN7K85g",
+      "video_id": "Rn6IHN7K85g",
+      "title": "Проверенное видео",
+      "source": "known"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=1TskQpbjKxE",
+      "video_id": "1TskQpbjKxE",
+      "title": "Проверенное видео",
+      "source": "known"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=sHqYv-G6X9g",
+      "video_id": "sHqYv-G6X9g",
+      "title": "Проверенное видео",
+      "source": "known"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=dxQmOR_e1do",
+      "video_id": "dxQmOR_e1do",
+      "title": "Проверенное видео",
+      "source": "known"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=x0FSL-sFJDE",
+      "video_id": "x0FSL-sFJDE",
+      "title": "Проверенное видео",
+      "source": "known"
+    }
+  ],
+  "all_videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=TL1t3FPQEqc",
+      "video_id": "TL1t3FPQEqc",
+      "title": "Проверенное видео",
+      "source": "known"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=wL8DVHuHvAk",
+      "video_id": "wL8DVHuHvAk",
+      "title": "Проверенное видео",
+      "source": "known"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=8nVHRNgXg1k",
+      "video_id": "8nVHRNgXg1k",
+      "title": "Проверенное видео",
+      "source": "known"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=qp0HIF3SfI4",
+      "video_id": "qp0HIF3SfI4",
+      "title": "Проверенное видео",
+      "source": "known"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=j7R-C4Dklf8",
+      "video_id": "j7R-C4Dklf8",
+      "title": "Проверенное видео",
+      "source": "known"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=RRJwdCDPxYU",
+      "video_id": "RRJwdCDPxYU",
+      "title": "Проверенное видео",
+      "source": "known"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Rn6IHN7K85g",
+      "video_id": "Rn6IHN7K85g",
+      "title": "Проверенное видео",
+      "source": "known"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=1TskQpbjKxE",
+      "video_id": "1TskQpbjKxE",
+      "title": "Проверенное видео",
+      "source": "known"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=sHqYv-G6X9g",
+      "video_id": "sHqYv-G6X9g",
+      "title": "Проверенное видео",
+      "source": "known"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=dxQmOR_e1do",
+      "video_id": "dxQmOR_e1do",
+      "title": "Проверенное видео",
+      "source": "known"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=x0FSL-sFJDE",
+      "video_id": "x0FSL-sFJDE",
+      "title": "Проверенное видео",
+      "source": "known"
+    }
+  ]
+}

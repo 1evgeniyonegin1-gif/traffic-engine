@@ -18,6 +18,7 @@ from traffic_engine.database import init_db, get_session
 from traffic_engine.database.models import Tenant
 from traffic_engine.core import AccountManager
 from traffic_engine.channels.auto_comments import ChannelMonitor
+from traffic_engine.channels.story_viewer import StoryMonitor
 from traffic_engine.notifications import TelegramNotifier
 
 
@@ -35,6 +36,7 @@ class TrafficEngine:
     def __init__(self):
         """Initialize Traffic Engine."""
         self.monitors: Dict[int, ChannelMonitor] = {}  # tenant_id -> monitor
+        self.story_monitors: Dict[int, StoryMonitor] = {}  # tenant_id -> story monitor
         self.account_managers: Dict[int, AccountManager] = {}
         self.notifier: Optional[TelegramNotifier] = None
         self._running = False
@@ -116,13 +118,26 @@ class TrafficEngine:
         # Start monitoring in background
         asyncio.create_task(monitor.start())
 
-        logger.info(f"Tenant {tenant.name} started")
+        # Create story monitor for viewing stories of target audience
+        story_monitor = StoryMonitor(
+            tenant_id=tenant.id,
+            account_manager=account_manager,
+            notifier=self.notifier,
+        )
+        await story_monitor.initialize()
+        self.story_monitors[tenant.id] = story_monitor
+
+        # Start story monitoring in background
+        asyncio.create_task(story_monitor.start())
+
+        logger.info(f"Tenant {tenant.name} started (with story viewing)")
 
         # Send start notification
         if self.notifier:
             accounts_count = len(account_manager._clients) if hasattr(account_manager, '_clients') else 0
             channels_count = len(monitor._channels) if hasattr(monitor, '_channels') else 0
             await self.notifier.notify_system_start(accounts_count, channels_count)
+            # Note: Story monitor also started but using same accounts
 
     async def stop(self) -> None:
         """Stop Traffic Engine."""
@@ -137,6 +152,10 @@ class TrafficEngine:
         # Stop all monitors
         for tenant_id, monitor in self.monitors.items():
             await monitor.stop()
+
+        # Stop all story monitors
+        for tenant_id, story_monitor in self.story_monitors.items():
+            await story_monitor.stop()
 
         # Close all account managers
         for tenant_id, manager in self.account_managers.items():

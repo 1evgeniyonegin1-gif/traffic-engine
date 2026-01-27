@@ -1,0 +1,73 @@
+{
+  "timestamp": "2026-01-27T17:27:14.029231",
+  "settings": {
+    "lang": "ru",
+    "videoType": 2,
+    "ratioOfClip": 1,
+    "maxClipNumber": 30,
+    "removeSilenceSwitch": 1,
+    "subtitleSwitch": 1,
+    "headlineSwitch": 1,
+    "highlightSwitch": 1,
+    "emojiSwitch": 0,
+    "autoBrollSwitch": 0
+  },
+  "total_urls": 11,
+  "successful": 7,
+  "failed": 4,
+  "projects": [
+    {
+      "url": "https://www.youtube.com/watch?v=TL1t3FPQEqc",
+      "project_id": 27743367,
+      "created_at": "2026-01-27T17:27:14"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=wL8DVHuHvAk",
+      "project_id": 27743374,
+      "created_at": "2026-01-27T17:27:16"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=8nVHRNgXg1k",
+      "project_id": 27743376,
+      "created_at": "2026-01-27T17:27:18"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=RRJwdCDPxYU",
+      "project_id": 27743382,
+      "created_at": "2026-01-27T17:27:24"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Rn6IHN7K85g",
+      "project_id": 27743384,
+      "created_at": "2026-01-27T17:27:26"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=1TskQpbjKxE",
+      "project_id": 27743385,
+      "created_at": "2026-01-27T17:27:28"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=x0FSL-sFJDE",
+      "project_id": 27743389,
+      "created_at": "2026-01-27T17:27:34"
+    }
+  ],
+  "errors": [
+    {
+      "url": "https://www.youtube.com/watch?v=qp0HIF3SfI4",
+      "error": "Rate limit"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=j7R-C4Dklf8",
+      "error": "Rate limit"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=sHqYv-G6X9g",
+      "error": "Rate limit"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=dxQmOR_e1do",
+      "error": "Rate limit"
+    }
+  ]
+}

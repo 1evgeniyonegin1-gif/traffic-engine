@@ -97,6 +97,14 @@ class Settings(BaseSettings):
     min_story_interval_sec: int = Field(default=2, ge=1)
     max_story_interval_sec: int = Field(default=10, ge=2)
 
+    # Story viewing settings
+    story_view_min_quality_score: int = Field(
+        default=70,
+        ge=0,
+        le=100,
+        description="Minimum quality_score for selecting users from target audience for story viewing"
+    )
+
     # ===========================================
     # WORKING HOURS (Human Simulation)
     # ===========================================

@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Traffic Engine Report</title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 { color: #333; }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #2196F3;
+        }
+        .stat-number.success { color: #4CAF50; }
+        .stat-number.error { color: #f44336; }
+        .stat-number.pending { color: #FF9800; }
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background: #2196F3;
+            color: white;
+        }
+        tr:hover { background: #f9f9f9; }
+        .status-completed { color: #4CAF50; font-weight: bold; }
+        .status-failed { color: #f44336; font-weight: bold; }
+        .status-pending { color: #FF9800; font-weight: bold; }
+        .channel-active { color: #4CAF50; }
+        .channel-inactive { color: #999; }
+        .error-msg {
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 12px;
+            color: #999;
+        }
+        .updated {
+            text-align: right;
+            color: #999;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #333;
+            margin-top: 30px;
+        }
+        .refresh-btn {
+            background: #2196F3;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .refresh-btn:hover { background: #1976D2; }
+    </style>
+</head>
+<body>
+    <h1>Traffic Engine Dashboard</h1>
+    <div class="updated">
+        Generated: 2026-01-24 11:04:03
+        <br><small>Run <code>python generate_report.py</code> to refresh</small>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-number success">0</div>
+            <div class="stat-label">Successful comments</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number error">10</div>
+            <div class="stat-label">Errors</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number pending">0</div>
+            <div class="stat-label">Pending</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">28</div>
+            <div class="stat-label">Active channels</div>
+        </div>
+    </div>
+
+    <h2>Recent Actions</h2>
+    <table>
+        <tr>
+            <th>Time</th>
+            <th>Channel</th>
+            <th>Status</th>
+            <th>Comment</th>
+            <th>Error</th>
+        </tr>
+        <tr>
+            <td>07:54:08</td>
+            <td>@sberstartup</td>
+            <td class="status-failed">failed</td>
+            <td>круто, наконец-то конкретные сроки и дела, а то вс...</td>
+            <td class="error-msg" title="Chat admin privileges are required to do that in the specified chat (for example, to send a message in a channel which is not yours), or invalid permissions used for the channel or group (caused by SendMessageRequest)">Chat admin privileges are required to do that in the specifi</td>
+        </tr>
+        <tr>
+            <td>07:39:28</td>
+            <td>@mspiridonov</td>
+            <td class="status-failed">failed</td>
+            <td>Кст, у меня был похожий период, когда запускал сво...</td>
+            <td class="error-msg" title="Chat admin privileges are required to do that in the specified chat (for example, to send a message in a channel which is not yours), or invalid permissions used for the channel or group (caused by SendMessageRequest)">Chat admin privileges are required to do that in the specifi</td>
+        </tr>
+        <tr>
+            <td>07:25:59</td>
+            <td>@mspiridonov</td>
+            <td class="status-failed">failed</td>
+            <td>точнооо, про ChatGPT и автоматизацию уже сейчас по...</td>
+            <td class="error-msg" title="Chat admin privileges are required to do that in the specified chat (for example, to send a message in a channel which is not yours), or invalid permissions used for the channel or group (caused by SendMessageRequest)">Chat admin privileges are required to do that in the specifi</td>
+        </tr>
+        <tr>
+            <td>07:15:04</td>
+            <td>@addmeto</td>
+            <td class="status-failed">failed</td>
+            <td>чёт дороговато, имхо проще было бы какую-нибудь оп...</td>
+            <td class="error-msg" title="Chat admin privileges are required to do that in the specified chat (for example, to send a message in a channel which is not yours), or invalid permissions used for the channel or group (caused by SendMessageRequest)">Chat admin privileges are required to do that in the specifi</td>
+        </tr>
+        <tr>
+            <td>07:05:31</td>
+            <td>@addmeto</td>
+            <td class="status-failed">failed</td>
+            <td>чёт падаёт всё подряд, может, проблема не у них, а...</td>
+            <td class="error-msg" title="Chat admin privileges are required to do that in the specified chat (for example, to send a message in a channel which is not yours), or invalid permissions used for the channel or group (caused by SendMessageRequest)">Chat admin privileges are required to do that in the specifi</td>
+        </tr>
+        <tr>
+            <td>06:54:13</td>
+            <td>@addmeto</td>
+            <td class="status-failed">failed</td>
+            <td>ну вот интересно, а насколько прогнозы от нейронок...</td>
+            <td class="error-msg" title="Chat admin privileges are required to do that in the specified chat (for example, to send a message in a channel which is not yours), or invalid permissions used for the channel or group (caused by SendMessageRequest)">Chat admin privileges are required to do that in the specifi</td>
+        </tr>
+        <tr>
+            <td>06:42:10</td>
+            <td>@addmeto</td>
+            <td class="status-failed">failed</td>
+            <td>ну ничего себе, не ожидал такого поворота</td>
+            <td class="error-msg" title="Chat admin privileges are required to do that in the specified chat (for example, to send a message in a channel which is not yours), or invalid permissions used for the channel or group (caused by SendMessageRequest)">Chat admin privileges are required to do that in the specifi</td>
+        </tr>
+        <tr>
+            <td>06:22:48</td>
+            <td>@addmeto</td>
+            <td class="status-failed">failed</td>
+            <td>ну это же нештатная ситуация, интересно, как они т...</td>
+            <td class="error-msg" title="Could not find the input entity for PeerUser(user_id=1005993407) (PeerUser). Please read https://docs.telethon.dev/en/stable/concepts/entities.html to find out more details.">Could not find the input entity for PeerUser(user_id=1005993</td>
+        </tr>
+        <tr>
+            <td>06:19:58</td>
+            <td>@Oskar_Hartmann</td>
+            <td class="status-failed">failed</td>
+            <td>вот это релакс-путешествие, круто!</td>
+            <td class="error-msg" title="Could not find the input entity for PeerUser(user_id=1369973729) (PeerUser). Please read https://docs.telethon.dev/en/stable/concepts/entities.html to find out more details.">Could not find the input entity for PeerUser(user_id=1369973</td>
+        </tr>
+        <tr>
+            <td>06:12:46</td>
+            <td>@Oskar_Hartmann</td>
+            <td class="status-failed">failed</td>
+            <td>чё за философские размышления прям в дороге, чел? ...</td>
+            <td class="error-msg" title="Could not find the input entity for PeerUser(user_id=1369973729) (PeerUser). Please read https://docs.telethon.dev/en/stable/concepts/entities.html to find out more details.">Could not find the input entity for PeerUser(user_id=1369973</td>
+        </tr>
+    </table>
+
+    <h2>Active Channels</h2>
+    <table>
+        <tr>
+            <th>Channel</th>
+            <th>Title</th>
+            <th>Strategy</th>
+            <th>Posts</th>
+            <th>Comments</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <td>@sosindex</td>
+            <td>Sosindex</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@mspiridonov</td>
+            <td>Максим Спиридонов</td>
+            <td>supportive</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@portnyaginlive</td>
+            <td>Дима Портнягин</td>
+            <td>supportive</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@grebenukm</td>
+            <td>Михаил Гребенюк</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@Oskar_Hartmann</td>
+            <td>Оскар Хартманн</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@sberstartup</td>
+            <td>СберСтартап</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@Theedinorogblog</td>
+            <td>The Edinorog 🦄</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@kutergin_on_fire</td>
+            <td>Кутергин в огне 🔥</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@bezsmuzi</td>
+            <td>Русский ИТ бизнес</td>
+            <td>expert</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@dindex</td>
+            <td>Индекс дятла</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@ventureStuff</td>
+            <td>Венчур по Понятиям | Street MB</td>
+            <td>expert</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@pisarevich</td>
+            <td>Ночной Писаревский</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@careerspace</td>
+            <td>careerspace</td>
+            <td>supportive</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@normrabota</td>
+            <td>Норм работа</td>
+            <td>supportive</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@morejobs</td>
+            <td>Больше джобсов</td>
+            <td>supportive</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@Salesnotes</td>
+            <td>Заметки продавца B2B</td>
+            <td>expert</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@silaslovv</td>
+            <td>Сила Слов (Мотивация | Самораз</td>
+            <td>supportive</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@anettaorlova</td>
+            <td>Анетта Орлова | Философия жизн</td>
+            <td>supportive</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@guzenuk</td>
+            <td>Филипп Гузенюк I Счастье в дея</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@stoicstrategy</td>
+            <td>🔥StoicStrategy: стоицизм в XXI</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@psychay</td>
+            <td>☕️ Чай с психологом Егора Егор</td>
+            <td>supportive</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@productradar_official</td>
+            <td>Product Radar — лучшие стартап</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@prostoecon</td>
+            <td>Простая экономика</td>
+            <td>expert</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@marketpsy</td>
+            <td>Психология Маркетинга</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@dnative</td>
+            <td>DNative — блог Ткачука про SMM</td>
+            <td>expert</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@c_behavior</td>
+            <td>Потребительское поведение; фак</td>
+            <td>expert</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@blogmilova</td>
+            <td>Ленивый маркетолог |Милов Анат</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@ikniga</td>
+            <td>Книги на миллион | бизнес блог</td>
+            <td>supportive</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-active">Active</td>
+        </tr>
+        <tr>
+            <td>@udalenka</td>
+            <td>freelance</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@biznes_online</td>
+            <td>online_business</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@zarabotok_v_internete</td>
+            <td>online_money</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@infobiz_ru</td>
+            <td>infobusiness</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@freelance_ru</td>
+            <td>freelance</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@remote_work_russia</td>
+            <td>freelance</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@vc_ru</td>
+            <td>business_news</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@onlinekursy</td>
+            <td>infoproducts</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@passivincome</td>
+            <td>passive_income</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@obuchenie_online</td>
+            <td>infoproducts</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@startupoftheday</td>
+            <td>startups</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@investicii_dengi</td>
+            <td>finance</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@chatgpt_ru</td>
+            <td>ai</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@wildberries_sellers</td>
+            <td>ecommerce</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@secretmag</td>
+            <td>business</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@pro_smm</td>
+            <td>marketing</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@motivacia</td>
+            <td>motivation</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@samorazvitie</td>
+            <td>self_development</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@tproger</td>
+            <td>it</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@digital_marketing_ru</td>
+            <td>marketing</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@uspeshnieludi</td>
+            <td>success</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@biznesmotivacia</td>
+            <td>motivation</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@finansy_ru</td>
+            <td>finance</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@lichnyibrand</td>
+            <td>personal_brand</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@ecommerce_ru</td>
+            <td>ecommerce</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@ai_news</td>
+            <td>ai</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@prodazhi_ru</td>
+            <td>sales</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@networking_ru</td>
+            <td>networking</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@targetolog_ru</td>
+            <td>marketing</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@python_ru</td>
+            <td>it</td>
+            <td>smart</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+        <tr>
+            <td>@addmeto</td>
+            <td>addmeto</td>
+            <td>supportive</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="channel-inactive">Disabled</td>
+        </tr>
+    </table>
+
+    <h2>Accounts</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Status</th>
+            <th>Today</th>
+        </tr>
+        <tr>
+            <td>Карина</td>
+            <td>+380954967658</td>
+            <td>warming</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Кира</td>
+            <td>+380955300455</td>
+            <td>warming</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Люба</td>
+            <td>+380955161146</td>
+            <td>warming</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Лёша</td>
+            <td>+998993466132</td>
+            <td>warming</td>
+            <td>0</td>
+        </tr>
+    </table>
+</body>
+</html>
