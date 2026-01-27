@@ -1,0 +1,30 @@
+# Telegram Userbot
+pyrogram>=2.0.106
+telethon>=1.34.0
+# tgcrypto - опционально, требует компилятор C
+
+# Database
+sqlalchemy>=2.0.25
+asyncpg>=0.29.0
+alembic>=1.13.1
+
+# Scheduling
+apscheduler>=3.10.4
+
+# AI Clients
+httpx>=0.26.0
+PyJWT>=2.8.0
+
+# Utils
+python-dotenv>=1.0.0
+pydantic>=2.5.3
+pydantic-settings>=2.1.0
+PyYAML>=6.0.1
+aiofiles>=23.2.1
+
+# Logging
+loguru>=0.7.2
+rich>=13.7.0
+
+# Crypto for session encryption and JWT
+cryptography>=42.0.2
