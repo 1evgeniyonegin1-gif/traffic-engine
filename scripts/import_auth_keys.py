@@ -51,7 +51,7 @@ async def create_session_from_auth_key(phone: str, auth_key_hex: str, dc_id: int
         # Преобразовать HEX в bytes
         auth_key_bytes = bytes.fromhex(auth_key_hex)
 
-        # Создать StringSession
+        # Создать пустую StringSession
         session = StringSession()
 
         # Создать клиент
@@ -61,10 +61,14 @@ async def create_session_from_auth_key(phone: str, auth_key_hex: str, dc_id: int
             api_hash=settings.telegram_api_hash,
         )
 
-        # Установить auth_key напрямую в сессию
+        # Подключиться к Telegram
         await client.connect()
 
-        # Получить session string
+        # Установить auth_key вручную в сессию
+        client.session.auth_key = AuthKey(data=auth_key_bytes)
+        client.session.dc_id = dc_id
+
+        # Сохранить session string
         session_string = client.session.save()
 
         await client.disconnect()
