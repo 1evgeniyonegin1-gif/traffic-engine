@@ -96,8 +96,7 @@ async def main():
 
     logger.info(f"\nВам нужно будет ввести коды из Telegram для каждого аккаунта")
     logger.info("Коды придут в приложение Telegram на эти номера\n")
-
-    input("Нажмите Enter чтобы начать...")
+    logger.info("Начинаем авторизацию...\n")
 
     # Авторизовать каждый аккаунт
     success_count = 0
