@@ -64,9 +64,10 @@ async def create_session_from_auth_key(phone: str, auth_key_hex: str, dc_id: int
         # Подключиться к Telegram
         await client.connect()
 
-        # Установить auth_key вручную в сессию
-        client.session.auth_key = AuthKey(data=auth_key_bytes)
-        client.session.dc_id = dc_id
+        # Установить auth_key и dc_id вручную через set_dc
+        auth_key_obj = AuthKey(data=auth_key_bytes)
+        client.session.set_dc(dc_id, '149.154.167.51', 443)  # DC2 IP
+        client.session.auth_key = auth_key_obj
 
         # Сохранить session string
         session_string = client.session.save()
