@@ -32,8 +32,8 @@ async def authorize_account(phone: str, account_id: int):
     # Создать клиент с пустой сессией
     client = TelegramClient(
         StringSession(),
-        api_id=settings.TELEGRAM_API_ID,
-        api_hash=settings.TELEGRAM_API_HASH,
+        api_id=settings.telegram_api_id,
+        api_hash=settings.telegram_api_hash,
     )
 
     await client.connect()
