@@ -43,9 +43,8 @@ async def main():
         logger.info(f"  {name} - {phone}")
 
     logger.info("\nКоды придут в Telegram на эти номера")
-    logger.info("Приготовьтесь вводить коды!\n")
-
-    input("Нажмите Enter чтобы начать...")
+    logger.info("Приготовьтесь вводить коды!")
+    logger.info("Начинаем...\n")
 
     # Авторизовать каждый
     success = 0

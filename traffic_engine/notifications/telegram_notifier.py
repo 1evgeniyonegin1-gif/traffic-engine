@@ -32,6 +32,10 @@ class ErrorType(str, Enum):
     DB_ERROR = "db_error"
     SYSTEM_START = "system_start"
     SYSTEM_STOP = "system_stop"
+    # Новые типы для модулей
+    INVITE_FAILED = "invite_failed"
+    STORY_REACT_FAILED = "story_react_failed"
+    DASHBOARD_ERROR = "dashboard_error"
 
 
 # Интервалы throttling для каждого типа ошибки (в секундах)
@@ -44,6 +48,10 @@ THROTTLE_INTERVALS = {
     ErrorType.DB_ERROR: 300,  # 5 минут
     ErrorType.SYSTEM_START: 0,  # Сразу
     ErrorType.SYSTEM_STOP: 0,  # Сразу
+    # Новые типы
+    ErrorType.INVITE_FAILED: 1800,  # 30 минут
+    ErrorType.STORY_REACT_FAILED: 1800,  # 30 минут
+    ErrorType.DASHBOARD_ERROR: 300,  # 5 минут
 }
 
 
@@ -147,6 +155,10 @@ class TelegramNotifier:
             ErrorType.DB_ERROR: "💾",
             ErrorType.SYSTEM_START: "🚀",
             ErrorType.SYSTEM_STOP: "🛑",
+            # Новые типы
+            ErrorType.INVITE_FAILED: "📨",
+            ErrorType.STORY_REACT_FAILED: "👁️",
+            ErrorType.DASHBOARD_ERROR: "📊",
         }
 
         emoji = emoji_map.get(error_type, "⚠️")
@@ -213,6 +225,25 @@ class TelegramNotifier:
         if reason:
             message += f"\nПричина: {reason}"
         return await self.notify(ErrorType.SYSTEM_STOP, message)
+
+    async def notify_invite_failed(self, account_phone: str, chat: str, error: str = "") -> bool:
+        """Уведомление об ошибке инвайта."""
+        message = f"Ошибка инвайта с <code>{account_phone}</code>\nГруппа: {chat}"
+        if error:
+            message += f"\nОшибка: {error[:100]}"
+        return await self.notify(ErrorType.INVITE_FAILED, message, context=chat)
+
+    async def notify_story_react_failed(self, account_phone: str, error: str = "") -> bool:
+        """Уведомление об ошибке реакции на сторис."""
+        message = f"Ошибка реакции на сторис с <code>{account_phone}</code>"
+        if error:
+            message += f"\nОшибка: {error[:100]}"
+        return await self.notify(ErrorType.STORY_REACT_FAILED, message)
+
+    async def notify_dashboard_error(self, error: str) -> bool:
+        """Уведомление об ошибке дашборда."""
+        message = f"Ошибка дашборда:\n<code>{error[:200]}</code>"
+        return await self.notify(ErrorType.DASHBOARD_ERROR, message)
 
     async def close(self) -> None:
         """Закрыть сессию бота."""

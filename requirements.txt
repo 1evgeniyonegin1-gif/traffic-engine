@@ -32,3 +32,9 @@ rich>=13.7.0
 
 # Crypto for session encryption and JWT
 cryptography>=42.0.2
+
+# Dashboard
+Flask>=3.0.0
+
+# Telegram Bot (for notifications)
+aiogram>=3.4.0

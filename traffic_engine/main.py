@@ -19,6 +19,7 @@ from traffic_engine.database.models import Tenant
 from traffic_engine.core import AccountManager
 from traffic_engine.channels.auto_comments import ChannelMonitor
 from traffic_engine.channels.story_viewer import StoryMonitor
+from traffic_engine.channels.chat_inviter import InviteMonitor
 from traffic_engine.notifications import TelegramNotifier
 
 
@@ -29,14 +30,15 @@ class TrafficEngine:
     Управляет всеми компонентами системы:
     - Account Manager
     - Channel Monitor (автокомментирование)
-    - Stories Reactor (в будущем)
-    - Chat Inviter (в будущем)
+    - Story Monitor (просмотр сторис ЦА)
+    - Invite Monitor (инвайты в группы-мероприятия)
     """
 
     def __init__(self):
         """Initialize Traffic Engine."""
         self.monitors: Dict[int, ChannelMonitor] = {}  # tenant_id -> monitor
         self.story_monitors: Dict[int, StoryMonitor] = {}  # tenant_id -> story monitor
+        self.invite_monitors: Dict[int, InviteMonitor] = {}  # tenant_id -> invite monitor
         self.account_managers: Dict[int, AccountManager] = {}
         self.notifier: Optional[TelegramNotifier] = None
         self._running = False
@@ -130,7 +132,19 @@ class TrafficEngine:
         # Start story monitoring in background
         asyncio.create_task(story_monitor.start())
 
-        logger.info(f"Tenant {tenant.name} started (with story viewing)")
+        # Create invite monitor for inviting target audience to event groups
+        invite_monitor = InviteMonitor(
+            tenant_id=tenant.id,
+            account_manager=account_manager,
+            notifier=self.notifier,
+        )
+        await invite_monitor.initialize()
+        self.invite_monitors[tenant.id] = invite_monitor
+
+        # Start invite monitoring in background
+        asyncio.create_task(invite_monitor.start())
+
+        logger.info(f"Tenant {tenant.name} started (comments + stories + invites)")
 
         # Send start notification
         if self.notifier:
@@ -156,6 +170,10 @@ class TrafficEngine:
         # Stop all story monitors
         for tenant_id, story_monitor in self.story_monitors.items():
             await story_monitor.stop()
+
+        # Stop all invite monitors
+        for tenant_id, invite_monitor in self.invite_monitors.items():
+            await invite_monitor.stop()
 
         # Close all account managers
         for tenant_id, manager in self.account_managers.items():

@@ -24,7 +24,7 @@ class YandexGPTClient:
         self.key_id = settings.yandex_key_id
         self.private_key = settings.yandex_private_key
         self.folder_id = settings.yandex_folder_id
-        self.model = "yandexgpt-lite"
+        self.model = "yandexgpt-32k"
         self.base_url = "https://llm.api.cloud.yandex.net/foundationModels/v1"
         self.iam_token = None
         self.token_expires_at = 0
